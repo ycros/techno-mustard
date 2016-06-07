@@ -14,7 +14,7 @@ class MainScene extends React.Component {
                 <a-assets>
                     <img id="toggleOnMap" src={toggleOnSrc}/>
                     <img id="toggleOffMap" src={toggleOffSrc}/>
-                </a-assets>s
+                </a-assets>
 
                 <Grid rotation="0 0 0" position="-2 0 0"/>
 
