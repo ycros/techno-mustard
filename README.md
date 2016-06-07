@@ -1,6 +1,6 @@
-# aframe-hello
+# Techno Mustard
   
-My new nifty webapp
+An experiment to implement a multi-user music jamming environment in AltspaceVR.
 
 
 ## Usage
@@ -16,3 +16,11 @@ While developing, you will probably rely mostly on `npm start`.  Here are some o
 |`lint`|Lint all `.js` files.|
 
 For the full list, see the scripts section of `package.json`
+
+## TODO
+
+* Sync backend
+* Drum sequencer
+* Synth parameter controls
+* Simple mixer
+ 
