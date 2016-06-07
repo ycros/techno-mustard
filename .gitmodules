@@ -1,0 +1,3 @@
+[submodule "vendor/aframe-altspace-component"]
+	path = vendor/aframe-altspace-component
+	url = https://github.com/AltspaceVR/aframe-altspace-component.git
