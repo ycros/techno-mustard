@@ -3,3 +3,6 @@ npm-debug.log
 dist/
 stats.json
 typings/
+
+.idea/dictionaries
+.idea/workspace.xml
