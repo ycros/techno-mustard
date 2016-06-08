@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Animation, Entity, Scene} from 'aframe-react';
 
-import { SequencerStore, SequencerState } from '../stores/SequencerStore';
+import {SequencerStore, SequencerState} from '../stores/SequencerStore';
 import SequencerActions from '../actions/SequencerActions';
 
 import GridButton from './GridButton';
@@ -31,24 +31,24 @@ export default class Grid extends React.Component<Props, SequencerState> {
         }
     }
 
-    _toggleGridPos = (x, y) => {
+    private toggleGridPos = (x, y) => {
         SequencerActions.togglePosition(x, y);
     };
 
-    _onChange = state => {
+    private onChange = state => {
         this.setState(state);
     };
 
-    _handleDrumToggle = () => {
+    private handleDrumToggle = () => {
         SequencerActions.toggleDrums();
     };
 
     componentDidMount() {
-        SequencerStore.listen(this._onChange);
+        SequencerStore.listen(this.onChange);
     }
 
     componentWillUnmount() {
-        SequencerStore.unlisten(this._onChange);
+        SequencerStore.unlisten(this.onChange);
     }
 
     render() {
@@ -63,7 +63,7 @@ export default class Grid extends React.Component<Props, SequencerState> {
                 buttons.push(<GridButton
                     key={key}
                     position={buttonPos}
-                    onToggle={this._toggleGridPos}
+                    onToggle={this.toggleGridPos}
                     state={state}
                     x={x}
                     y={y}/>);
@@ -83,7 +83,8 @@ export default class Grid extends React.Component<Props, SequencerState> {
                         geometry={{ primitive: 'box', width: 0.5, height: playheadHeight, depth: 0.1 }}
                         material="color: #ef6068"/>
 
-                <ToggleButton position={[((this.state.width + 1) * 0.45), 0, 0]} state={this.state.drums} onToggle={this._handleDrumToggle} />
+                <ToggleButton position={[((this.state.width + 1) * 0.45), 0, 0]} state={this.state.drums}
+                              onToggle={this.handleDrumToggle}/>
 
             </Entity>
         );

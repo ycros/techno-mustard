@@ -1,6 +1,7 @@
 import * as AFRAME from 'aframe';
 
 import { SystemStore } from '../../stores/SystemStore';
+import MeshBasicMaterial = THREE.MeshBasicMaterial;
 
 AFRAME.registerComponent('meter', {
     schema: { type: 'string' },
@@ -19,7 +20,7 @@ AFRAME.registerComponent('meter', {
 
     tick() {
         if (this.meter) {
-            let mesh = this.el.object3DMap['mesh'];
+            let mesh = <THREE.Mesh>this.el.object3DMap['mesh'];
             const level = this.meter.getLevel();
             const clip = this.meter.isClipped();
             let calc = level * 22;
@@ -32,10 +33,9 @@ AFRAME.registerComponent('meter', {
             mesh.position.setY(calc / 20);
 
             if (clip) {
-                console.log('clip');
-                mesh.material.color.set(0xff0000);
+                (<MeshBasicMaterial> mesh.material).color.set(0xff0000);
             } else {
-                mesh.material.color.set(0x0000ff);
+                (<MeshBasicMaterial> mesh.material).color.set(0x0000ff);
             }
         }
     }

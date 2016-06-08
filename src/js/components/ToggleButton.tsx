@@ -27,12 +27,3 @@ export default class ToggleButton extends React.Component<Props, void> {
         );
     }
 }
-// ToggleButton.propTypes = {
-//     onToggle: React.PropTypes.func,
-//     position: React.PropTypes.array,
-//     state: React.PropTypes.bool
-// };
-// ToggleButton.defaultProps = {
-//     state: false,
-//     position: '0 0 0'
-// };
