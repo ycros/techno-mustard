@@ -3,6 +3,8 @@
 // Definitions by: Luke Phillips <https://github.com/lukephills>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
+/* tslint:disable */
+
 interface ToneFactory {
     new(inputs?: number, outputs?: number): Tone;
 }
