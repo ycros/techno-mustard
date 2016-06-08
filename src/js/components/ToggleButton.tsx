@@ -4,7 +4,7 @@ import * as React from 'react';
 interface Props {
     onToggle: () => void;
     state: boolean;
-    position: Array<number>
+    position: Array<number>;
 }
 
 export default class ToggleButton extends React.Component<Props, void> {

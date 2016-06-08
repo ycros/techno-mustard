@@ -4,7 +4,7 @@
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
 interface ToneFactory {
-    new(inputs?: number, outputs?: number): Tone
+    new(inputs?: number, outputs?: number): Tone;
 }
 
 declare class Tone {
@@ -54,7 +54,7 @@ declare class Tone {
     toSeconds(time?: Tone.Time, now?: number): number;
 }
 
-declare module Tone {
+declare namespace Tone {
 
     var Abs: {
         new(): Tone.Abs;
@@ -1007,7 +1007,7 @@ declare module Tone {
 
     interface Sequence extends Tone {
         start(time: Tone.Time, offset?: Tone.Time): void;
-        stop(): void;  
+        stop(): void;
     }
 
     module Signal {
@@ -1122,7 +1122,7 @@ declare module Tone {
     }
 
     interface Time{}
- 
+
     var Transport: Transport & TransportConstructor;
 
     interface TransportConstructor {

@@ -6,7 +6,7 @@ export default function shimRequestAnimationFrame() {
     const originalRequestAnimationFrame = window.requestAnimationFrame;
     const originalCancelAnimationFrame = window.cancelAnimationFrame;
 
-    var callbacks = [];
+    let callbacks = [];
 
     const requestAnimationFrameCallback = function (time) {
         const currentCallbacks = callbacks;

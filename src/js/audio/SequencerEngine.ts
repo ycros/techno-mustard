@@ -70,7 +70,7 @@ export default class SequencerEngine {
             }
         }
 
-        if (this._state.drums && col % 4 == 0) {
+        if (this._state.drums && col % 4 === 0) {
             this.drumSynth.triggerAttackRelease("F1", "8n");
         }
     };

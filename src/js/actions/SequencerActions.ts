@@ -3,9 +3,9 @@ import alt from '../alt';
 import { AbstractActions } from './AbstractActions';
 
 interface Actions {
-    togglePosition(x: number, y: number): { x: number, y: number }
-    updatePlayhead(x: number): number
-    toggleDrums(): boolean
+    togglePosition(x: number, y: number): { x: number, y: number };
+    updatePlayhead(x: number): number;
+    toggleDrums(): boolean;
 }
 
 class SequencerActions extends AbstractActions implements Actions {

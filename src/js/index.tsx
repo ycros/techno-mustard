@@ -3,9 +3,8 @@ require("../assets/styles/base.css");
 require("../assets/styles/app.css");
 
 require('aframe');
-//require('babel-polyfill');
+// require('babel-polyfill');
 require('aframe-altspace-component');
-//import meter = require('./aframe/component/meter.ts');
 require('./aframe/component/meter.ts');
 
 import * as React from 'react';

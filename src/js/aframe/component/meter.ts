@@ -22,14 +22,14 @@ AFRAME.registerComponent('meter', {
             let mesh = this.el.object3DMap['mesh'];
             const level = this.meter.getLevel();
             const clip = this.meter.isClipped();
-            var calc = level*22;
+            let calc = level * 22;
 
-            if (calc == 0) {
+            if (calc === 0) {
                 calc = 0.01;
             }
 
             mesh.scale.setY(calc);
-            mesh.position.setY(calc/20);
+            mesh.position.setY(calc / 20);
 
             if (clip) {
                 console.log('clip');

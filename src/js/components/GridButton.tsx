@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {Animation, Entity, Scene} from 'aframe-react';
-//import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 import ToggleButton from './ToggleButton';
 

@@ -4,5 +4,5 @@ declare module 'aframe-react' {
 
     export const Animation: any;
     export const Entity: any;
-    export const Scene: any;    
+    export const Scene: any;
 }

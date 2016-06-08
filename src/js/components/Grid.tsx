@@ -8,13 +8,12 @@ import GridButton from './GridButton';
 import ToggleButton from './ToggleButton';
 
 interface Props {
-    position: string,
-    rotation: string,
-    // onGridChange: () => void
+    position: string;
+    rotation: string;
 }
 
 export default class Grid extends React.Component<Props, SequencerState> {
-    private buttonPositions: Array<Array<Array<number>>>; // [x][y] = [1, 2, 3] 
+    private buttonPositions: Array<Array<Array<number>>>; // [x][y] = [1, 2, 3]
 
     constructor(props, context) {
         super(props, context);
@@ -53,7 +52,7 @@ export default class Grid extends React.Component<Props, SequencerState> {
     }
 
     render() {
-        var buttons = [];
+        let buttons = [];
 
         for (let x = 0; x < this.state.width; x++) {
             for (let y = 0; y < this.state.height; y++) {
@@ -84,15 +83,9 @@ export default class Grid extends React.Component<Props, SequencerState> {
                         geometry={{ primitive: 'box', width: 0.5, height: playheadHeight, depth: 0.1 }}
                         material="color: #ef6068"/>
 
-                <ToggleButton position={[((this.state.width + 1)*0.45), 0, 0]} state={this.state.drums} onToggle={this._handleDrumToggle} />
+                <ToggleButton position={[((this.state.width + 1) * 0.45), 0, 0]} state={this.state.drums} onToggle={this._handleDrumToggle} />
 
             </Entity>
         );
     }
 }
-
-// Grid.propTypes = {
-// position: React.PropTypes.string.isRequired,
-// rotation: React.PropTypes.string.isRequired,
-// onGridChange: React.PropTypes.func
-// };
