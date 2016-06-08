@@ -1,21 +1,22 @@
-import "../index.html";
-import "../assets/styles/base.css";
-import "../assets/styles/app.css";
+require("../index.html");
+require("../assets/styles/base.css");
+require("../assets/styles/app.css");
 
-import 'aframe';
-import 'babel-polyfill';
-import 'aframe-altspace-component';
-import './aframe/component/meter';
+require('aframe');
+//require('babel-polyfill');
+require('aframe-altspace-component');
+//import meter = require('./aframe/component/meter.ts');
+require('./aframe/component/meter.ts');
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 
 import MainScene from './components/MainScene';
 import SequencerEngine from './audio/SequencerEngine';
 import shimRequestAnimationFrame from './util/raf_dethrottle_shim';
 
 import SystemActions from './actions/SystemActions';
-import SystemStore from './stores/SystemStore';
+import { SystemStore } from './stores/SystemStore';
 
 shimRequestAnimationFrame();
 

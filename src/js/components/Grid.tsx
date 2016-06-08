@@ -1,26 +1,34 @@
-import React from 'react';
+import * as React from 'react';
 import {Animation, Entity, Scene} from 'aframe-react';
 
-import SequencerStore from '../stores/SequencerStore';
+import { SequencerStore, SequencerState } from '../stores/SequencerStore';
 import SequencerActions from '../actions/SequencerActions';
 
 import GridButton from './GridButton';
 import ToggleButton from './ToggleButton';
 
-export default class Grid extends React.Component {
+interface Props {
+    position: string,
+    rotation: string,
+    // onGridChange: () => void
+}
+
+export default class Grid extends React.Component<Props, SequencerState> {
+    private buttonPositions: Array<Array<Array<number>>>; // [x][y] = [1, 2, 3] 
+
     constructor(props, context) {
         super(props, context);
 
         this.state = SequencerStore.getState();
 
-        this._buttonPositions = [];
+        this.buttonPositions = [];
 
         for (let x = 0; x < this.state.width; x++) {
             let buttonPosCol = [];
             for (let y = 0; y < this.state.height; y++) {
                 buttonPosCol.push([x * 0.45, y * 0.45, 0]);
             }
-            this._buttonPositions.push(buttonPosCol);
+            this.buttonPositions.push(buttonPosCol);
         }
     }
 
@@ -50,7 +58,7 @@ export default class Grid extends React.Component {
         for (let x = 0; x < this.state.width; x++) {
             for (let y = 0; y < this.state.height; y++) {
                 let key = x.toString() + ',' + y.toString();
-                let buttonPos = this._buttonPositions[x][y];
+                let buttonPos = this.buttonPositions[x][y];
                 let state = this.state.positions[x][y];
 
                 buttons.push(<GridButton
@@ -83,8 +91,8 @@ export default class Grid extends React.Component {
     }
 }
 
-Grid.propTypes = {
-    position: React.PropTypes.string.isRequired,
-    rotation: React.PropTypes.string.isRequired,
-    onGridChange: React.PropTypes.func
-};
+// Grid.propTypes = {
+// position: React.PropTypes.string.isRequired,
+// rotation: React.PropTypes.string.isRequired,
+// onGridChange: React.PropTypes.func
+// };

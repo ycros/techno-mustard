@@ -1,6 +1,6 @@
-import AFRAME from 'aframe';
+import * as AFRAME from 'aframe';
 
-import SystemStore from '../../stores/SystemStore';
+import { SystemStore } from '../../stores/SystemStore';
 
 AFRAME.registerComponent('meter', {
     schema: { type: 'string' },

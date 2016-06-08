@@ -14,6 +14,7 @@ While developing, you will probably rely mostly on `npm start`.  Here are some o
 |`watch`|Same as `npm run build` but watches for file changes and re-compiles accordingly.|
 |`clean`|Deletes the `/dist` directory.|
 |`lint`|Lint all `.js` files.|
+|`build-profile`|Outputs webpack build profile data to `stats.json`.|
 
 For the full list, see the scripts section of `package.json`
 

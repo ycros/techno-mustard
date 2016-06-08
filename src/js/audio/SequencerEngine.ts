@@ -1,14 +1,14 @@
 
-import Tone from 'tone';
+import * as Tone from 'tone';
 import SequencerActions from '../actions/SequencerActions';
-import SequencerStore from '../stores/SequencerStore';
+import { SequencerStore, SequencerState } from '../stores/SequencerStore';
 
-import irSrc from '../../assets/audio/ir1.ogg';
+const irSrc = require<string>('../../assets/audio/ir1.ogg');
 
 export default class SequencerEngine {
-    _cols = [];
-    _state = null;
-    _sequencer = null;
+    _cols: Array<number> = [];
+    _state: SequencerState;
+    _sequencer: Tone.Sequence;
 
     synth = new Tone.PolySynth(8);
     synthDelay = new Tone.PingPongDelay('8n', 0.3);
@@ -94,7 +94,7 @@ export default class SequencerEngine {
             this._sequencer = new Tone.Sequence(this._sequencerLoop, this._cols, "16n");
 
             if (replacingSequencer) {
-                this._sequencer.start();
+                this._sequencer.start(0);
             }
         }
 

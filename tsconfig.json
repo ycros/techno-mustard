@@ -3,9 +3,18 @@
         "module": "commonjs",
         "target": "es5",
         "sourceMap": true,
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "jsx": "react",
+        "allowJs": true
     },
+    "include": [
+        "src"
+    ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "bower_components",
+        "vendor",
+        "dist"
     ]
 }

@@ -1,4 +1,4 @@
-import Alt from 'alt';
+import * as Alt from 'alt';
 
 var alt = new Alt();
 

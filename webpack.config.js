@@ -24,12 +24,18 @@ module.exports = {
     entry: {
         // As an array so that we can unshift in the HMR plugin if we need to
         app: [
-            './src/js/index.js'
-        ]
+            './src/js/index.tsx'
+        ],
         // Separate bundle for any production dependencies.
-        // TODO: Uncomment and add third-party dependencies as needed
-        //,vendor: [
-        //]
+        vendor: [
+            'react',
+            'react-dom',
+            'tone',
+            'alt',
+            'aframe',
+            'aframe-react',
+            'aframe-altspace-component'
+        ]
     },
 
     output: {
@@ -40,11 +46,10 @@ module.exports = {
 
     plugins: [
         // Pulls commonly used modules into common chunks that are reused in other chunks
-        // TODO: uncomment below if you add third-party dependencies into the vendor entry point bundle
-        //new webpack.optimize.CommonsChunkPlugin({
-        //  name: 'vendor',
-        //  filename: 'js/vendor.js'
-        //}),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'js/vendor.js'
+        }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -62,8 +67,8 @@ module.exports = {
             },
             {
                 test: /\.tsx?$/,
-                include: path.join(__dirname, 'src'),
-                loader: 'ts-loader'
+                include: [path.join(__dirname, 'src')],
+                loader: 'awesome-typescript-loader'
             },
             {
                 test: /\.css$/,
@@ -85,12 +90,18 @@ module.exports = {
                 test: /\.json$/,
                 loader: 'json-loader'
             }
+        ],
+        preLoaders: [
+            {
+                test: /\.js$/,
+                loader: 'source-map-loader'
+            }
         ]
     },
 
     resolve: {
-        alias: {
-            // aframe: 'aframe/src/index.js'
-        }
-    }
+        extensions: ['', '.js', '.jsx', '.ts', '.tsx']
+    },
+
+    // profile: true,
 };

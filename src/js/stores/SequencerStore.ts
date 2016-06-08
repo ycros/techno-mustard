@@ -1,8 +1,25 @@
 import alt from '../alt';
 import SequencerActions from '../actions/SequencerActions';
 
-class SequencerStore {
+import { AbstractStoreModel } from './AbstractStoreModel';
+
+export interface SequencerState {
+    positions: Array<Array<boolean>>;
+    width: number;
+    height: number;
+    playhead: number;
+    drums: boolean;
+}
+
+class SequencerStoreImpl extends AbstractStoreModel<SequencerState> implements SequencerState {
+    positions: Array<Array<boolean>>;
+    width: number;
+    height: number;
+    playhead: number;
+    drums: boolean;
+
     constructor() {
+        super();
         this.positions = [];
         this.width = 16;
         this.height = 5;
@@ -28,9 +45,9 @@ class SequencerStore {
         this.drums = true;
 
         this.bindListeners({
-            handleTogglePosition: SequencerActions.TOGGLE_POSITION,
-            handleUpdatePlayhead: SequencerActions.UPDATE_PLAYHEAD,
-            handleToggleDrums: SequencerActions.TOGGLE_DRUMS
+            handleTogglePosition: SequencerActions.togglePosition,
+            handleUpdatePlayhead: SequencerActions.updatePlayhead,
+            handleToggleDrums: SequencerActions.toggleDrums
         });
     }
 
@@ -48,4 +65,4 @@ class SequencerStore {
     }
 }
 
-export default alt.createStore(SequencerStore, 'SequencerStore');
+export const SequencerStore = alt.createStore<SequencerState>(SequencerStoreImpl, 'SequencerStore');

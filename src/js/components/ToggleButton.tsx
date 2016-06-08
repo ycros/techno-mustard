@@ -1,7 +1,13 @@
 import {Animation, Entity, Scene} from 'aframe-react';
-import React from 'react';
+import * as React from 'react';
 
-export default class ToggleButton extends React.Component {
+interface Props {
+    onToggle: () => void;
+    state: boolean;
+    position: Array<number>
+}
+
+export default class ToggleButton extends React.Component<Props, void> {
     constructor(props) {
         super(props);
     }
@@ -21,12 +27,12 @@ export default class ToggleButton extends React.Component {
         );
     }
 }
-ToggleButton.propTypes = {
-    onToggle: React.PropTypes.func,
-    position: React.PropTypes.array,
-    state: React.PropTypes.bool
-};
-ToggleButton.defaultProps = {
-    state: false,
-    position: '0 0 0'
-};
+// ToggleButton.propTypes = {
+//     onToggle: React.PropTypes.func,
+//     position: React.PropTypes.array,
+//     state: React.PropTypes.bool
+// };
+// ToggleButton.defaultProps = {
+//     state: false,
+//     position: '0 0 0'
+// };

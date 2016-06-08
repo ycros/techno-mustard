@@ -1,12 +1,16 @@
 import {Animation, Entity, Scene} from 'aframe-react';
-import React from 'react';
+import * as React from 'react';
 
-import toggleOffSrc from '../../assets/img/toggle_off.png';
-import toggleOnSrc from '../../assets/img/toggle_on.png';
+const toggleOffSrc = require<string>('../../assets/img/toggle_off.png');
+const toggleOnSrc = require<string>('../../assets/img/toggle_on.png');
 
 import Grid from './Grid';
 
-class MainScene extends React.Component {
+interface Props {}
+
+interface State {}
+
+class MainScene extends React.Component<Props, State> {
     render() {
         return (
             <a-scene altspace="usePixelScale: true" scale="50 50 50"

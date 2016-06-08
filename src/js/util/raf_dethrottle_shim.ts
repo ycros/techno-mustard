@@ -1,24 +1,20 @@
-// import Stats from 'stats.js';
 
 export default function shimRequestAnimationFrame() {
-    // const stats = new Stats();
-    // document.body.appendChild(stats.dom);
+    // AltspaceVR has a broken requestAnimationFrame implementation, that only accepts ONE callback
+    // so we shim our own implementation over it
 
     const originalRequestAnimationFrame = window.requestAnimationFrame;
+    const originalCancelAnimationFrame = window.cancelAnimationFrame;
 
     var callbacks = [];
 
     const requestAnimationFrameCallback = function (time) {
-        // stats.begin();
-
         const currentCallbacks = callbacks;
         callbacks = [];
 
         for (let i = 0; i < currentCallbacks.length; i++) {
             currentCallbacks[i](time);
         }
-
-        // stats.end();
     };
 
     window.requestAnimationFrame = function(callback) {
@@ -29,5 +25,11 @@ export default function shimRequestAnimationFrame() {
         if (callbacks.indexOf(callback) === -1) {
             callbacks.push(callback);
         }
+
+        return 0;
+    };
+
+    window.cancelAnimationFrame = function(handle: number) {
+        // not implemented
     };
 }
