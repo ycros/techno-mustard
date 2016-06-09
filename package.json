@@ -1,11 +1,11 @@
 {
-  "name": "aframe-hello",
+  "name": "techno-mustard",
   "private": true,
   "version": "0.0.1",
-  "description": "My new nifty webapp",
+  "description": "An experiment to implement a multi-user music jamming environment in AltspaceVR.",
   "scripts": {
     "clean": "shx rm -rf ./dist",
-    "lint": "eslint ./src",
+    "lint": "tslint ./src/**/*.ts ./src/**/*.tsx",
     "build": "webpack --progress",
     "watch": "webpack --watch",
     "start": "node server.js",
