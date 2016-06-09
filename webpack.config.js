@@ -62,12 +62,18 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                include: path.join(__dirname, 'src'),
+                include: [
+                    path.join(__dirname, 'src'),
+                    path.join(__dirname, 'test')
+                ],
                 loader: 'babel'
             },
             {
                 test: /\.tsx?$/,
-                include: [path.join(__dirname, 'src')],
+                include: [
+                    path.join(__dirname, 'src'),
+                    path.join(__dirname, 'test')
+                ],
                 loader: 'awesome-typescript-loader'
             },
             {

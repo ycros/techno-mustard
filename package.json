@@ -10,7 +10,8 @@
     "watch": "webpack --watch",
     "start": "node server.js",
     "dev": "node server.js --hot",
-    "build-profile": "webpack --progress --profile --json > stats.json"
+    "build-profile": "webpack --progress --profile --json > stats.json",
+    "test": "karma start"
   },
   "repository": {
     "type": "git",
@@ -31,14 +32,22 @@
     "eslint": "^2.9.0",
     "file-loader": "^0.8.5",
     "html-loader": "^0.4.3",
+    "jasmine": "^2.4.1",
     "json-loader": "^0.5.4",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-typescript-preprocessor2": "^1.1.1",
+    "karma-webpack": "^1.7.0",
     "minimist": "^1.2.0",
+    "react-addons-test-utils": "^0.14.8",
     "shx": "^0.1.1",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.2",
     "tslint": "^3.10.2",
     "typescript": "^1.8.10",
+    "wallaby-webpack": "0.0.22",
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1"
   },
