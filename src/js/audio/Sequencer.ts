@@ -1,8 +1,7 @@
 import * as Tone from 'tone';
-
-import {AbstractSequencerState} from "../stores/AbstractSequencerState";
-import {SequencerActions} from "../actions/SequencerActions";
-
+import {SequencerState} from "../stores/SessionStore";
+import {SequencerID} from "../types/SequencerID";
+import {SessionActions} from "../actions/SessionActions";
 
 export interface Sequenced {
     trigger(time: Tone.Time, y: number): void;
@@ -11,16 +10,14 @@ export interface Sequenced {
 export class Sequencer {
     private cols: Array<number> = [];
     private toneSequencer: Tone.Sequence;
-    private state: AbstractSequencerState;
+    private state: SequencerState;
 
     constructor(private sequenced: Sequenced,
-                private actions: SequencerActions) {
+                public id: SequencerID) {
     }
 
-    update = (newState: AbstractSequencerState) => {
+    update = (newState: SequencerState) => {
         if (!this.state || this.state.width !== newState.width) {
-            let replacingSequencer = false;
-
             this.cols.length = 0;
 
             for (let x = 0; x < newState.width; x++) {
@@ -40,10 +37,10 @@ export class Sequencer {
     };
 
     private sequencerLoop = (time, col) => {
-        this.actions.updatePlayhead(col);
+        SessionActions.updateSequencerPlayhead(this.id, col);
 
         for (let y = 0; y < this.state.height; y++) {
-            let play = this.state.positions[col][y];
+            let play = this.state.grid[col][y];
             if (play) {
                 this.sequenced.trigger(time, y);
             }

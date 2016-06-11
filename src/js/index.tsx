@@ -1,3 +1,4 @@
+import {SessionActions} from "./actions/SessionActions";
 require("../index.html");
 require("../assets/styles/base.css");
 require("../assets/styles/app.css");
@@ -13,6 +14,7 @@ import MainScene from './components/MainScene';
 import {Session} from "./audio/Session";
 import shimRequestAnimationFrame from './util/raf_dethrottle_shim';
 import initAframe from './aframe/init';
+import {SequencerID} from "./types/SequencerID";
 
 const session = new Session();
 initAframe(session);
@@ -20,3 +22,8 @@ shimRequestAnimationFrame();
 
 ReactDOM.render(<MainScene />, document.getElementById('app'));
 session.start();
+
+SessionActions.toggleSequencerPosition(SequencerID.Drum, 0, 0);
+SessionActions.toggleSequencerPosition(SequencerID.Drum, 4, 0);
+SessionActions.toggleSequencerPosition(SequencerID.Drum, 8, 0);
+SessionActions.toggleSequencerPosition(SequencerID.Drum, 12, 0);

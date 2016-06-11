@@ -1,30 +1,33 @@
 import * as React from 'react';
 import {Animation, Entity, Scene} from 'aframe-react';
 
-import {PolySequencerStore, SequencerState} from '../stores/SequencerStore';
-import {PolySequencerActions} from '../actions/SequencerActions';
-
 import GridButton from './GridButton';
-import ToggleButton from './ToggleButton';
+import {SequencerState} from "../stores/SessionStore";
+import {SessionActions} from "../actions/SessionActions";
 
 interface Props {
     position: string;
     rotation: string;
+    sequencerState: SequencerState;
 }
 
-export default class Grid extends React.Component<Props, SequencerState> {
+export default class Grid extends React.Component<Props, {}> {
     private buttonPositions: Array<Array<Array<number>>>; // [x][y] = [1, 2, 3]
+
+    static propTypes = {
+        position: React.PropTypes.string.isRequired,
+        rotation: React.PropTypes.string.isRequired,
+        sequencerState: React.PropTypes.any.isRequired
+    };
 
     constructor(props, context) {
         super(props, context);
 
-        this.state = PolySequencerStore.getState();
-
         this.buttonPositions = [];
 
-        for (let x = 0; x < this.state.width; x++) {
+        for (let x = 0; x < this.props.sequencerState.width; x++) {
             let buttonPosCol = [];
-            for (let y = 0; y < this.state.height; y++) {
+            for (let y = 0; y < this.props.sequencerState.height; y++) {
                 buttonPosCol.push([x * 0.45, y * 0.45, 0]);
             }
             this.buttonPositions.push(buttonPosCol);
@@ -32,29 +35,17 @@ export default class Grid extends React.Component<Props, SequencerState> {
     }
 
     private toggleGridPos = (x, y) => {
-        PolySequencerActions.togglePosition(x, y);
+        SessionActions.toggleSequencerPosition(this.props.sequencerState.id, x, y);
     };
-
-    private onChange = state => {
-        this.setState(state);
-    };
-
-    componentDidMount() {
-        PolySequencerStore.listen(this.onChange);
-    }
-
-    componentWillUnmount() {
-        PolySequencerStore.unlisten(this.onChange);
-    }
 
     render() {
         let buttons = [];
 
-        for (let x = 0; x < this.state.width; x++) {
-            for (let y = 0; y < this.state.height; y++) {
+        for (let x = 0; x < this.props.sequencerState.width; x++) {
+            for (let y = 0; y < this.props.sequencerState.height; y++) {
                 let key = x.toString() + ',' + y.toString();
                 let buttonPos = this.buttonPositions[x][y];
-                let state = this.state.positions[x][y];
+                let state = this.props.sequencerState.grid[x][y];
 
                 buttons.push(<GridButton
                     key={key}
@@ -66,9 +57,9 @@ export default class Grid extends React.Component<Props, SequencerState> {
             }
         }
 
-        const padding = ((this.state.height - 0.01) * 0.05);
-        const playheadHeight = (this.state.height * 0.40) + padding;
-        const playheadPosition = [this.state.playhead * 0.45, playheadHeight / 2 - padding, -0.01];
+        const padding = ((this.props.sequencerState.height - 0.01) * 0.05);
+        const playheadHeight = (this.props.sequencerState.height * 0.40) + padding;
+        const playheadPosition = [this.props.sequencerState.playhead * 0.45, playheadHeight / 2 - padding, -0.01];
 
         return (
             <Entity position={this.props.position} rotation={this.props.rotation}>
