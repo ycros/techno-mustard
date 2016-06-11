@@ -1,28 +1,27 @@
 import alt from '../alt';
-import SequencerActions from '../actions/SequencerActions';
+import {DrumSequencerActions, PolySequencerActions} from '../actions/SequencerActions';
 
 import { AbstractStoreModel } from './AbstractStoreModel';
+import {AbstractSequencerState} from "./AbstractSequencerState";
 
-export interface SequencerState {
+export interface SequencerState extends AbstractSequencerState {
     positions: Array<Array<boolean>>;
     width: number;
     height: number;
     playhead: number;
-    drums: boolean;
 }
 
-class SequencerStoreImpl extends AbstractStoreModel<SequencerState> implements SequencerState {
+abstract class AbstractSequencerStore extends AbstractStoreModel<SequencerState> implements SequencerState {
     positions: Array<Array<boolean>>;
     width: number;
     height: number;
     playhead: number;
-    drums: boolean;
 
-    constructor() {
+    constructor(width: number, height: number) {
         super();
         this.positions = [];
-        this.width = 16;
-        this.height = 5;
+        this.width = width;
+        this.height = height;
         this.playhead = 0;
 
         for (let x = 0; x < this.width; x++) {
@@ -32,23 +31,6 @@ class SequencerStoreImpl extends AbstractStoreModel<SequencerState> implements S
             }
             this.positions.push(col);
         }
-
-        this.positions[0][0] = true;
-        this.positions[2][4] = true;
-        this.positions[3][1] = true;
-        this.positions[6][3] = true;
-        this.positions[9][1] = true;
-        this.positions[10][4] = true;
-        this.positions[13][2] = true;
-        this.positions[15][4] = true;
-
-        this.drums = true;
-
-        this.bindListeners({
-            handleTogglePosition: SequencerActions.togglePosition,
-            handleUpdatePlayhead: SequencerActions.updatePlayhead,
-            handleToggleDrums: SequencerActions.toggleDrums
-        });
     }
 
     handleTogglePosition(pos) {
@@ -59,10 +41,43 @@ class SequencerStoreImpl extends AbstractStoreModel<SequencerState> implements S
     handleUpdatePlayhead(x) {
         this.playhead = x;
     }
+}
 
-    handleToggleDrums() {
-        this.drums = !this.drums;
+class PolySequencerStoreImpl extends AbstractSequencerStore {
+    constructor() {
+        super(16, 5);
+
+        this.positions[0][0] = true;
+        this.positions[2][4] = true;
+        this.positions[3][1] = true;
+        this.positions[6][3] = true;
+        this.positions[9][1] = true;
+        this.positions[10][4] = true;
+        this.positions[13][2] = true;
+        this.positions[15][4] = true;
+
+        this.bindListeners({
+            handleTogglePosition: PolySequencerActions.togglePosition,
+            handleUpdatePlayhead: PolySequencerActions.updatePlayhead
+        });
     }
 }
 
-export const SequencerStore = alt.createStore<SequencerState>(SequencerStoreImpl, 'SequencerStore');
+class DrumSequencerStoreImpl extends AbstractSequencerStore {
+    constructor() {
+        super(16, 1);
+
+        this.positions[0][0] = true;
+        this.positions[4][0] = true;
+        this.positions[8][0] = true;
+        this.positions[12][0] = true;
+
+        this.bindListeners({
+            handleTogglePosition: DrumSequencerActions.togglePosition,
+            handleUpdatePlayhead: DrumSequencerActions.updatePlayhead
+        });
+    }
+}
+
+export const PolySequencerStore = alt.createStore<SequencerState>(PolySequencerStoreImpl, 'PolySequencerStore');
+export const DrumSequencerStore = alt.createStore<SequencerState>(DrumSequencerStoreImpl, 'DrumSequencerStore');

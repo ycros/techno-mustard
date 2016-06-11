@@ -1,21 +1,13 @@
-import {SystemStore} from '../../stores/SystemStore';
 import MeshBasicMaterial = THREE.MeshBasicMaterial;
 import {Component, ComponentElement} from "aframe";
+import {Session} from "../../audio/Session";
 
-export default function newMeter() {
+export default function newMeter(session: Session) {
     return {
         schema: {type: 'string'},
 
         init() {
-            this.meter = null;
-            this.updateState(SystemStore.getState());
-            SystemStore.listen(this.updateState.bind(this));
-        },
-
-        updateState(newState) {
-            if (newState.sequencerEngine) {
-                this.meter = newState.sequencerEngine.meter;
-            }
+            this.meter = session.master.meter;
         },
 
         tick() {

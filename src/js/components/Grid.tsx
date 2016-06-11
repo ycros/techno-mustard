@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {Animation, Entity, Scene} from 'aframe-react';
 
-import {SequencerStore, SequencerState} from '../stores/SequencerStore';
-import SequencerActions from '../actions/SequencerActions';
+import {PolySequencerStore, SequencerState} from '../stores/SequencerStore';
+import {PolySequencerActions} from '../actions/SequencerActions';
 
 import GridButton from './GridButton';
 import ToggleButton from './ToggleButton';
@@ -18,7 +18,7 @@ export default class Grid extends React.Component<Props, SequencerState> {
     constructor(props, context) {
         super(props, context);
 
-        this.state = SequencerStore.getState();
+        this.state = PolySequencerStore.getState();
 
         this.buttonPositions = [];
 
@@ -32,23 +32,19 @@ export default class Grid extends React.Component<Props, SequencerState> {
     }
 
     private toggleGridPos = (x, y) => {
-        SequencerActions.togglePosition(x, y);
+        PolySequencerActions.togglePosition(x, y);
     };
 
     private onChange = state => {
         this.setState(state);
     };
 
-    private handleDrumToggle = () => {
-        SequencerActions.toggleDrums();
-    };
-
     componentDidMount() {
-        SequencerStore.listen(this.onChange);
+        PolySequencerStore.listen(this.onChange);
     }
 
     componentWillUnmount() {
-        SequencerStore.unlisten(this.onChange);
+        PolySequencerStore.unlisten(this.onChange);
     }
 
     render() {
@@ -82,9 +78,6 @@ export default class Grid extends React.Component<Props, SequencerState> {
                 <Entity position={playheadPosition}
                         geometry={{ primitive: 'box', width: 0.5, height: playheadHeight, depth: 0.1 }}
                         material="color: #ef6068"/>
-
-                <ToggleButton position={[((this.state.width + 1) * 0.45), 0, 0]} state={this.state.drums}
-                              onToggle={this.handleDrumToggle}/>
 
             </Entity>
         );

@@ -2,13 +2,12 @@ import alt from '../alt';
 
 import { AbstractActions } from './AbstractActions';
 
-interface Actions {
+export interface SequencerActions {
     togglePosition(x: number, y: number): { x: number, y: number };
     updatePlayhead(x: number): number;
-    toggleDrums(): boolean;
 }
 
-class SequencerActions extends AbstractActions implements Actions {
+class PolySequencerActions extends AbstractActions implements SequencerActions {
     togglePosition(x, y) {
         return {x, y};
     }
@@ -16,10 +15,20 @@ class SequencerActions extends AbstractActions implements Actions {
     updatePlayhead(x) {
         return x;
     }
+}
 
-    toggleDrums() {
-        return true;
+class DrumSequencerActions extends AbstractActions implements SequencerActions {
+    togglePosition(x, y) {
+        return {x, y};
+    }
+
+    updatePlayhead(x) {
+        return x;
     }
 }
 
-export default alt.createActions<Actions>(SequencerActions);
+// class PolySequencerActionsImpl extends AbstractSequencerActions {}
+// class DrumSequencerActionsImpl extends AbstractSequencerActions {}
+
+export const PolySequencerActions = alt.createActions<SequencerActions>(PolySequencerActions);
+export const DrumSequencerActions = alt.createActions<SequencerActions>(DrumSequencerActions);

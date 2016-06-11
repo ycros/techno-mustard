@@ -1,64 +1,23 @@
-import newMeter from '../../../src/js/aframe/component/meter';
-import {SystemStore} from "../../../src/js/stores/SystemStore";
 import * as THREE from 'three';
 
-describe('aframe/component/meter maintains state from SystemStore', () => {
-    let meter;
+import {Session} from "../../../src/js/audio/Session";
 
-    beforeEach(() => {
-        meter = newMeter();
-    });
+import newMeter from '../../../src/js/aframe/component/meter';
 
-    it('should update state from the SystemStore on init', () => {
-        const myState = {
-            sequencerEngine: {
-                meter: 'moo'
+describe('aframe/component/meter init', () => {
+    it("should get meter from the session's master", () => {
+        const toneMeter = 'moo';
+        const meter: any = newMeter(<Session>{
+            master: {
+                meter: toneMeter
             }
-        };
+        });
 
-        spyOn(SystemStore, 'getState').and.returnValue(myState);
-
-        meter.init();
-
-        expect(meter.meter).toBe('moo');
-    });
-
-    it("shouldn't set meter if no sequencerEngine is present", () => {
-        const myState = {};
-
-        spyOn(SystemStore, 'getState').and.returnValue(myState);
+        expect(meter.meter).toBeUndefined('assumption');
 
         meter.init();
 
-        expect(meter.meter).toBeNull();
-    });
-
-    it("should listen to store state changes", () => {
-        spyOn(SystemStore, 'listen');
-
-        meter.init();
-
-        expect(SystemStore.listen).toHaveBeenCalledTimes(1);
-    });
-
-    it("should update state when store state changes", () => {
-        const initialState = {
-            sequencerEngine: { meter: 'foo' }
-        };
-        const newState = {
-            sequencerEngine: { meter: 'bar' }
-        };
-
-        spyOn(SystemStore, 'getState').and.returnValue(initialState);
-        const listenSpy = spyOn(SystemStore, 'listen');
-
-        meter.init();
-
-        expect(meter.meter).toBe('foo');
-
-        listenSpy.calls.argsFor(0)[0](newState);
-
-        expect(meter.meter).toBe('bar');
+        expect(meter.meter).toBe(toneMeter);
     });
 });
 
@@ -68,7 +27,7 @@ describe('aframe/component/meter renders meter on tick', () => {
     let toneMeter;
 
     beforeEach(() => {
-        meter = newMeter();
+        meter = newMeter(<Session>{});
         mesh = new THREE.Mesh();
         toneMeter = {
             getLevel() { return 0; },

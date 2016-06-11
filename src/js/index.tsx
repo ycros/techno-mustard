@@ -10,16 +10,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import MainScene from './components/MainScene';
-import SequencerEngine from './audio/SequencerEngine';
+import {Session} from "./audio/Session";
 import shimRequestAnimationFrame from './util/raf_dethrottle_shim';
 import initAframe from './aframe/init';
 
-import SystemActions from './actions/SystemActions';
-import { SystemStore } from './stores/SystemStore';
-
-initAframe();
+const session = new Session();
+initAframe(session);
 shimRequestAnimationFrame();
 
 ReactDOM.render(<MainScene />, document.getElementById('app'));
-const sequencerEngine = new SequencerEngine();
-SystemActions.setSequencerEngine(sequencerEngine);
+session.start();
