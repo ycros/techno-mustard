@@ -8,6 +8,13 @@ interface Props {
 }
 
 export default class ToggleButton extends React.Component<Props, void> {
+
+    static propTypes = {
+        onToggle: React.PropTypes.func.isRequired,
+        position: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
+        state: React.PropTypes.bool.isRequired
+    };
+
     constructor(props) {
         super(props);
     }
@@ -27,3 +34,5 @@ export default class ToggleButton extends React.Component<Props, void> {
         );
     }
 }
+
+
