@@ -8,7 +8,8 @@ import Grid from './Grid';
 import {SessionState, SessionStore} from "../stores/SessionStore";
 import {SequencerID} from "../types/SequencerID";
 
-interface Props {}
+interface Props {
+}
 
 class MainScene extends React.Component<Props, SessionState> {
     constructor() {
@@ -38,12 +39,12 @@ class MainScene extends React.Component<Props, SessionState> {
                     <img id="toggleOffMap" src={toggleOffSrc}/>
                 </a-assets>
 
-                <Grid position="-6.5 0 3" rotation="-30 30 0" sequencerState={this.state.sequencers[SequencerID.Poly]} />
+                <Grid position="-6.5 0 3" rotation="-30 30 0" sequencerState={this.state.sequencers[SequencerID.Poly]}/>
 
-                <Grid position="0.5 0 0" rotation="-30 -30 0" sequencerState={this.state.sequencers[SequencerID.Drum]} />
+                <Grid position="0.5 0 0" rotation="-30 -30 0" sequencerState={this.state.sequencers[SequencerID.Drum]}/>
 
                 <Entity geometry="primitive: box; width: 0.2; height: 0.1; depth: 0.1" position="0 -0.2 0"
-                        material="color: blue" meter="meter">
+                        rotation="-30 0 0" material="color: blue" meter="meter">
                 </Entity>
 
                 <a-camera position="0 1.0 5">
