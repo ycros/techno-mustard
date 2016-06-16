@@ -18,7 +18,8 @@ class ChannelStoreImpl extends AbstractStoreModel<ChannelState> implements Chann
     constructor() {
         super();
 
-        const socket = new Socket('ws://zen.fritz.box:4000/socket');
+        // TODO: this needs to be prod/dev configurable
+        const socket = new Socket('ws://gnaw.ycros.org:4501/socket');
         socket.connect();
 
         const channel = socket.channel('session:sync', {});

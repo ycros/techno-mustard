@@ -43,8 +43,8 @@ class SessionStoreImpl extends AbstractStoreModel<SessionState> implements Sessi
             id: SequencerID.Drum,
             active: true,
             width: 16,
-            height: 1,
-            grid: buildGrid(16, 1),
+            height: 2,
+            grid: buildGrid(16, 2),
             playhead: 0
         };
 

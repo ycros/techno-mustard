@@ -3,9 +3,9 @@ import {Track} from "./Track";
 import {Sequenced} from "./Sequencer";
 
 export class DrumSynthTrack extends Track implements Sequenced {
-    synth = new Tone.DrumSynth();
-    distortion = new Tone.Distortion(0.2);
-    compressor = new Tone.Compressor({
+    kickSynth = new Tone.DrumSynth();
+    kickDistortion = new Tone.Distortion(0.2);
+    kickCompressor = new Tone.Compressor({
         threshold: -24,
         ratio: 4,
         release: 0.250,
@@ -13,13 +13,43 @@ export class DrumSynthTrack extends Track implements Sequenced {
         knee: 6
     });
 
+    snareNoiseSynth = new Tone.NoiseSynth({
+        envelope:  {
+            // attack: 0.05
+            decay: 0.15,
+            sustain: 0,
+            release: 0.15
+        }
+    });
+    snareSynth = new (<any>Tone).SimpleSynth({
+        envelope: {
+            decay: 0.1,
+            sustain: 0,
+            release: 0.1
+        }
+    });
+
+    gain = new (<any>Tone).Gain();
+
     protected setupRouting() {
-        this.distortion.oversample = '4x';
-        this.synth.chain(this.distortion, this.compressor);
-        this.output = this.compressor;
+        this.kickDistortion.oversample = '4x';
+        this.kickSynth.chain(this.kickDistortion, this.kickCompressor, this.gain);
+
+        this.snareNoiseSynth.chain(this.gain);
+        this.snareSynth.chain(this.gain);
+
+        this.output = this.gain;
     }
 
     trigger(time: Tone.Time, y: number): void {
-        this.synth.triggerAttackRelease('F1', '16n');
+        switch (y) {
+            case 0:
+                this.kickSynth.triggerAttackRelease('F1', 0.1);
+                break;
+            case 1:
+                this.snareNoiseSynth.triggerAttackRelease(0.2);
+                this.snareSynth.triggerAttackRelease('C2', 0.01);
+                break;
+        };
     }
 }
