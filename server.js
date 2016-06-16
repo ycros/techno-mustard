@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
 var options = require('minimist')(process.argv.slice(2));
-var publicPath = "http://localhost:" + +config.devServer.port;
+var publicPath = "http://zen.fritz.box:" + +config.devServer.port;
 
 function removeOptimizationPlugins() {
     const toRemove = [];
@@ -31,7 +31,7 @@ if (options.hot) {
 }
 
 new WebpackDevServer(webpack(config), config.devServer)
-    .listen(config.devServer.port, 'localhost', function(err) {
+    .listen(config.devServer.port, '0.0.0.0', function(err) {
         if (err) {
             console.log(err);
         }

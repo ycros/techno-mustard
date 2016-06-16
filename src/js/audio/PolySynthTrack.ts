@@ -24,7 +24,7 @@ export class PolySynthTrack extends Track implements Sequenced {
     }
 
     private synthTrigger(time, note) {
-        const duration = (Math.sin(time * 0.4) * 0.15) + 0.25;
+        const duration = (Math.sin(time * 0.4) * 0.02) + 0.03;
         this.synth.triggerAttackRelease(note, duration);
     }
 }

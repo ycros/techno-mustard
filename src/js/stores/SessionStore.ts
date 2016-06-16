@@ -2,6 +2,8 @@ import alt from '../alt';
 import {AbstractStoreModel} from "./AbstractStoreModel";
 import {SequencerID} from "../types/SequencerID";
 import {SessionActions} from "../actions/SessionActions";
+import {buildGrid} from "../util/grid_builder";
+import {ChannelActions} from "../actions/ChannelActions";
 
 type Grid = Array<Array<boolean>>;
 
@@ -33,7 +35,7 @@ class SessionStoreImpl extends AbstractStoreModel<SessionState> implements Sessi
             active: true,
             width: 16,
             height: 5,
-            grid: this.buildGrid(16, 5),
+            grid: buildGrid(16, 5),
             playhead: 0
         };
 
@@ -42,14 +44,17 @@ class SessionStoreImpl extends AbstractStoreModel<SessionState> implements Sessi
             active: true,
             width: 16,
             height: 1,
-            grid: this.buildGrid(16, 1),
+            grid: buildGrid(16, 1),
             playhead: 0
         };
 
         this.bindListeners({
             handleToggleSequencer: SessionActions.toggleSequencer,
             handleUpdatePlayhead: SessionActions.updateSequencerPlayhead,
-            handleTogglePosition: SessionActions.toggleSequencerPosition
+            handleTogglePosition: SessionActions.toggleSequencerPosition,
+            handleSetState: ChannelActions.setState,
+            handleSetPosition: ChannelActions.setSequencerPosition,
+            handleSetActive: ChannelActions.setSequencerActive
         });
     }
 
@@ -70,16 +75,20 @@ class SessionStoreImpl extends AbstractStoreModel<SessionState> implements Sessi
         sequencer.grid[x][y] = !sequencer.grid[x][y];
     }
 
-    private buildGrid(width: number, height: number): Grid {
-        const result = [];
-        for (let x = 0; x < width; x++) {
-            let col = [];
-            for (let y = 0; y < height; y++) {
-                col.push(false);
-            }
-            result.push(col);
-        }
-        return result;
+    handleSetState(newState: SessionState) {
+        Object.keys(this.sequencers).forEach(k => {
+            newState.sequencers[k].playhead = this.sequencers[k].playhead;
+        });
+        this.sequencers = newState.sequencers;
+    }
+
+    handleSetPosition({id, x, y, value}) {
+        const sequencer = this.sequencers[id];
+        sequencer.grid[x][y] = value;
+    }
+
+    handleSetActive({id, value}) {
+        this.sequencers[id].active = value;
     }
 }
 

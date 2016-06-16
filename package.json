@@ -54,10 +54,12 @@
   },
   "dependencies": {
     "aframe": "^0.2.0",
+
     "aframe-altspace-component": "file:./vendor/aframe-altspace-component/",
     "aframe-react": "^2.0.0",
     "alt": "^0.18.4",
     "babel-polyfill": "^6.9.1",
+    "phoenix": "^1.2.0-rc.0",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
     "tone": "^0.6.1"

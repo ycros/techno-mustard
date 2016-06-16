@@ -20,6 +20,6 @@ export class DrumSynthTrack extends Track implements Sequenced {
     }
 
     trigger(time: Tone.Time, y: number): void {
-        this.synth.triggerAttackRelease('F1', '8n');
+        this.synth.triggerAttackRelease('F1', '16n');
     }
 }

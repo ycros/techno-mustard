@@ -57,9 +57,8 @@ export default class Grid extends React.Component<Props, {}> {
             }
         }
 
-        const padding = ((this.props.sequencerState.height - 0.01) * 0.05);
-        const playheadHeight = (this.props.sequencerState.height * 0.40) + padding;
-        const playheadPosition = [this.props.sequencerState.playhead * 0.45, playheadHeight / 2 - padding, -0.01];
+        const playheadHeight = (this.props.sequencerState.height * 0.45);
+        const playheadPosition = [this.props.sequencerState.playhead * 0.45, (playheadHeight / 2) - (0.45/2), -0.01];
 
         return (
             <Entity position={this.props.position} rotation={this.props.rotation}>

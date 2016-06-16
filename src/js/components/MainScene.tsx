@@ -39,15 +39,15 @@ class MainScene extends React.Component<Props, SessionState> {
                     <img id="toggleOffMap" src={toggleOffSrc}/>
                 </a-assets>
 
-                <Grid position="-6.5 0 3" rotation="-30 30 0" sequencerState={this.state.sequencers[SequencerID.Poly]}/>
+                <Grid position="-6.5 -5 3" rotation="-30 30 0" sequencerState={this.state.sequencers[SequencerID.Poly]}/>
 
-                <Grid position="0.5 0 0" rotation="-30 -30 0" sequencerState={this.state.sequencers[SequencerID.Drum]}/>
+                <Grid position="0.5 -5 0" rotation="-30 -30 0" sequencerState={this.state.sequencers[SequencerID.Drum]}/>
 
-                <Entity geometry="primitive: box; width: 0.2; height: 0.1; depth: 0.1" position="0 -0.2 0"
+                <Entity geometry="primitive: box; width: 0.2; height: 0.1; depth: 0.1" position="0 -5.2 0"
                         rotation="-30 0 0" material="color: blue" meter="meter">
                 </Entity>
 
-                <a-camera position="0 1.0 5">
+                <a-camera position="0 -4 5">
                     <a-cursor color="#2E3A87"/>
                 </a-camera>
             </a-scene>
