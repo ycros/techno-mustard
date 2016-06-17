@@ -38,10 +38,11 @@ export class Session {
         this.master.output.toMaster();
 
         // here we go
-        (<any>Tone.Buffer).onload = () => {
+        (<any>Tone.Buffer).on('load', () => {
+            console.log("Starting transport.");
             Tone.Transport.bpm.value = 101;
             Tone.Transport.start();
-        };
+        });
     }
 
     private updateState(newState: SessionState) {

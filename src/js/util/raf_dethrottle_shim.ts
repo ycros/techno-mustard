@@ -3,6 +3,8 @@ export default function shimRequestAnimationFrame() {
     // AltspaceVR has a broken requestAnimationFrame implementation, that only accepts ONE callback
     // so we shim our own implementation over it
 
+    console.log('raf shimmed');
+
     const originalRequestAnimationFrame = window.requestAnimationFrame;
     const originalCancelAnimationFrame = window.cancelAnimationFrame;
 

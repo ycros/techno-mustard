@@ -25,17 +25,17 @@ module.exports = {
         // As an array so that we can unshift in the HMR plugin if we need to
         app: [
             './src/js/index.tsx'
-        ],
-        // Separate bundle for any production dependencies.
-        vendor: [
-            'react',
-            'react-dom',
-            'tone',
-            'alt',
-            'aframe',
-            'aframe-react',
-            'aframe-altspace-component'
         ]
+        // Separate bundle for any production dependencies.
+        // vendor: [
+        //     'react',
+        //     'react-dom',
+        //     'tone',
+        //     'alt',
+        //     'aframe',
+        //     'aframe-react',
+        //     'aframe-altspace-component'
+        // ]
     },
 
     output: {
@@ -46,10 +46,10 @@ module.exports = {
 
     plugins: [
         // Pulls commonly used modules into common chunks that are reused in other chunks
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            filename: 'js/vendor.js'
-        }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: 'vendor',
+        //     filename: 'js/vendor.js'
+        // }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
             compress: {

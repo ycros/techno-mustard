@@ -29,6 +29,7 @@ class ChannelStoreImpl extends AbstractStoreModel<ChannelState> implements Chann
             .receive('error', error => console.error('error connecting to sync channel', error));
 
         channel.on('state', state => {
+            console.log("Received initial sequencer state.");
             ChannelActions.setState(state);
         });
         channel.on('set_position', setPos => {
