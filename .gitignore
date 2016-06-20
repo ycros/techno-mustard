@@ -1,8 +1,8 @@
 /node_modules/
-npm-debug.log
-dist/
-stats.json
-typings/
+/npm-debug.log
+/dist/
+/stats.json
+/typings/
 
-.idea/dictionaries
-.idea/workspace.xml
+/.idea/dictionaries
+/.idea/workspace.xml
