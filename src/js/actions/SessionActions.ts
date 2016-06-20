@@ -24,6 +24,8 @@ export interface SessionActions {
 }
 
 class SessionActionsImpl extends AbstractActions implements SessionActions {
+    static displayName = 'SessionActions';
+
     toggleSequencerPosition(sequencerId: SequencerID, x: number, y: number): SequencerPositionData {
         return { id: sequencerId, x, y };
     }

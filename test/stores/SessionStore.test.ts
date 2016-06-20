@@ -25,6 +25,10 @@ const stringsToGrid = function(...strings: string[]) {
 };
 
 describe('SessionStore', () => {
+    beforeEach(() => {
+        realAlt.recycle();
+    });
+
     afterEach(() => {
         realAlt.recycle();
     });
