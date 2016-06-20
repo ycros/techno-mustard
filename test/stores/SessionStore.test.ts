@@ -50,9 +50,10 @@ describe('SessionStore', () => {
             id: SequencerID.Drum,
             active: true,
             width: 16,
-            height: 1,
+            height: 2,
             playhead: 0,
             grid: stringsToGrid(
+                '0000 0000 0000 0000',
                 '0000 0000 0000 0000')
         };
 
