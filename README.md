@@ -20,8 +20,8 @@ For the full list, see the scripts section of `package.json`
 
 ## TODO
 
-* Sync backend
-* Drum sequencer
+* ~~Sync backend~~
+* ~~Drum sequencer~~
 * Synth parameter controls
 * Simple mixer
  
